@@ -79,7 +79,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/userAccountHistoryImageButton"
+        android:id="@+id/userAccountArchivesImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -95,20 +95,20 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/userAccountHistoryTextView"
+        android:id="@+id/userAccountArchivesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/history"
+        android:text="@string/archives"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/userAccountUtilitiesImageButton"
         app:layout_constraintEnd_toStartOf="@+id/userAccuntSearchtextView"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userAccountHistoryImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/userAccountArchivesImageButton"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
@@ -156,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userAccountHistoryImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/userAccountArchivesImageButton"
         app:layout_constraintVertical_bias="0.454"
         tools:src="@tools:sample/avatars" />
 
@@ -176,5 +176,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userAccountUtilitiesImageButton"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/userAccountProfilePicImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014"
+        app:srcCompat="@mipmap/default_image" />
 
 </android.support.constraint.ConstraintLayout>
