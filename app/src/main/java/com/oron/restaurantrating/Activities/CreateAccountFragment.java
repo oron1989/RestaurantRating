@@ -1,8 +1,11 @@
 package com.oron.restaurantrating.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,9 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.oron.restaurantrating.R;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -35,13 +51,25 @@ public class CreateAccountFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    //my fields
+    //my field
+    private ImageButton profilePic;
     private EditText createAccountFirstName;
     private EditText createAccountLastName;
     private EditText createAccountEmail;
     private EditText createAccountPassword;
     private Spinner createAccountSpinner;
     private Button createAccountLoginButton;
+
+    private Context context;
+
+    //Firebase field
+    private DatabaseReference myDatabaseReference;
+    private FirebaseDatabase myDatabase;
+    private StorageReference myFirebaseStorage;
+    private FirebaseAuth myAuth;
+    private ProgressDialog myProgressDialog;
+    private Uri resultUri = null;
+    private static final int GALLERY_CODE = 1;
 
     public CreateAccountFragment() {
         // Required empty public constructor
@@ -79,12 +107,33 @@ public class CreateAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_account, container, false);
 
+        myDatabase = FirebaseDatabase.getInstance();
+        myDatabaseReference = myDatabase.getReference().child("Users");
+
+        myAuth = FirebaseAuth.getInstance();
+
+        myFirebaseStorage = FirebaseStorage.getInstance().getReference().child("User_Profile_Pics");
+
+        myProgressDialog = new ProgressDialog(context);
+
+        profilePic = view.findViewById(R.id.createAccountprofilePicView);
         createAccountFirstName = view.findViewById(R.id.createAccountFirstNameEditText);
         createAccountLastName = view.findViewById(R.id.createAccountLastNameEditText);
         createAccountEmail = view.findViewById(R.id.createAccountEmailEditText);
         createAccountPassword = view.findViewById(R.id.createAccountPasswordEditText);
         createAccountSpinner = view.findViewById(R.id.createAccountSpinner);
         createAccountLoginButton = view.findViewById(R.id.createAccountButton);
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open galley and get result (image)
+                Intent galleyIntent = new Intent();
+                galleyIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleyIntent.setType("image/*");
+                startActivityForResult(galleyIntent, GALLERY_CODE);
+            }
+        });
 
         createAccountLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,19 +146,62 @@ public class CreateAccountFragment extends Fragment {
     }
 
     private void createNewAccount() {
-        String firstName = createAccountFirstName.getText().toString().trim();
-        String lastName = createAccountLastName.getText().toString().trim();
+        final String firstName = createAccountFirstName.getText().toString().trim();
+        final String lastName = createAccountLastName.getText().toString().trim();
         String email = createAccountEmail.getText().toString().trim();
         String password = createAccountPassword.getText().toString().trim();
 
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            //move to user account
-            MainActivity mainActivity = (MainActivity)getActivity();
-            mainActivity.getUserAccountActivity();
-//          mProgressDialog.setMessage("Creating Account...");
-//          mProgressDialog.show();
+            myProgressDialog.setMessage("Creating Account...");
+            myProgressDialog.show();
+
+            myAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    if (authResult != null) {
+                        StorageReference imagePath = myFirebaseStorage.child("User_Profile_Pics").child(resultUri.getLastPathSegment());
+                        imagePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                String userId = myAuth.getCurrentUser().getUid();
+                                DatabaseReference currentUserDB = myDatabaseReference.child(userId);
+                                currentUserDB.child("firstName").setValue(firstName);
+                                currentUserDB.child("lastName").setValue(lastName);
+                                currentUserDB.child("image").setValue(resultUri.toString()) ;
+
+                                myProgressDialog.dismiss();
+
+                                //move to user account
+                                MainActivity mainActivity = (MainActivity)getActivity();
+                                mainActivity.getUserAccountActivity();
+                            }
+                        });
+                    }
+                }
+            });
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_CODE && resultCode == RESULT_OK) {
+            Uri mImageUri = data.getData();
+            CropImage.activity(mImageUri).setAspectRatio(1, 1).setGuidelines(CropImageView.Guidelines.ON).start(context,this);
+
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                resultUri = result.getUri();
+                profilePic.setImageURI(resultUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -122,6 +214,7 @@ public class CreateAccountFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

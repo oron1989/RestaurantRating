@@ -56,8 +56,6 @@ public class LoginFragment extends Fragment {
     private Button loginButton;
     private Button loginCreateAccountButton;
 
-    MainActivity mainActivity = (MainActivity)getActivity();
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -102,15 +100,18 @@ public class LoginFragment extends Fragment {
         loginButton = view.findViewById(R.id.loginButton);
         loginCreateAccountButton = view.findViewById(R.id.loginCreateAccountButton);
 
+        //When the user is already logged in and reopens the app
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mUser = firebaseAuth.getCurrentUser();
 
                 if (mUser != null) {
+                    MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.getUserAccountActivity();
                 } else {
-                    //massage the user is log out
+                    MainActivity mainActivity = (MainActivity)getActivity();
+                    mainActivity.getLogout();
                 }
             }
         };
@@ -118,9 +119,7 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //move to user account
-                mainActivity.getUserAccountActivity();
-
+                //Check that the fields are full
                 if (!TextUtils.isEmpty(loginUserEmailEditText.getText().toString()) && !TextUtils.isEmpty(loginUserPasswordEditText.getText().toString())) {
                     String email = loginUserEmailEditText.getText().toString();
                     String pwd = loginUserPasswordEditText.getText().toString();
@@ -128,7 +127,8 @@ public class LoginFragment extends Fragment {
                     login(email, pwd);
 
                 } else {
-
+                    MainActivity mainActivity = (MainActivity)getActivity();
+                    mainActivity.getNotFull();
                 }
             }
         });
@@ -137,6 +137,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //move to create account
+                MainActivity mainActivity = (MainActivity)getActivity();
                 mainActivity.getCreateAccountFragment();
 
             }
@@ -146,15 +147,19 @@ public class LoginFragment extends Fragment {
     }
 //TODO add auth matode
     private void login(String email, String pwd) {
+        //Check that the user exists
         mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //Yay!! we're in!
+                    MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.getUserAccountActivity();
-
                 } else {
                     //Not in!!
+                    //move to create account
+                    MainActivity mainActivity = (MainActivity)getActivity();
+                    mainActivity.getLoginError();
                 }
             }
         });

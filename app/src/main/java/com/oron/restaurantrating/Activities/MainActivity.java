@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     Fragment fragment = null;
-    //oron
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,5 +54,16 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    public void getLogout() {
+        Toast.makeText(MainActivity.this, "Not Signed In", Toast.LENGTH_LONG).show();
+    }
+
+    public void getLoginError() {
+        Toast.makeText(MainActivity.this, "One of the fields is incorrect", Toast.LENGTH_LONG).show();
+    }
+
+    public void getNotFull() {
+        Toast.makeText(MainActivity.this, "One or more fields are incomplete", Toast.LENGTH_LONG).show();
+    }
 
 }

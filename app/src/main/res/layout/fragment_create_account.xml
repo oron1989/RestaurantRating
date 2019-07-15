@@ -8,21 +8,23 @@
     tools:context=".Activities.CreateAccountFragment">
 
 
-    <ImageView
-        android:id="@+id/createAccountLogoView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/createAccountprofilePicView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/default_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.005" />
 
     <EditText
         android:id="@+id/createAccountFirstNameEditText"
@@ -38,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountLogoView"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountprofilePicView"
         app:layout_constraintVertical_bias="0.065" />
 
     <EditText
