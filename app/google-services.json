@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "581833017631",
+    "firebase_url": "https://restaurantrating-prj.firebaseio.com",
+    "project_id": "restaurantrating-prj",
+    "storage_bucket": "restaurantrating-prj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581833017631:android:7a312b20292eb085",
+        "android_client_info": {
+          "package_name": "com.oron.restaurantrating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581833017631-8h3e4t1drqm1nhm1pmjkptemd02dls3c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oron.restaurantrating",
+            "certificate_hash": "2ca030f1a68d4576c58211cec60243d55a0610d7"
+          }
+        },
+        {
+          "client_id": "581833017631-2k5mpc3bup74sbq7rjpdrk2skckp1cd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjSn-oXmQA07o4BM8Pbro_vVJkV1s2raE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581833017631-2k5mpc3bup74sbq7rjpdrk2skckp1cd8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

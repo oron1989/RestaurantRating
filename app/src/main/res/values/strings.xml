@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">RestaurantRating</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="create_account">Create Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="hello">Hello</string>
+    <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="new_form">New Form</string>
+    <string name="utilities">Utilities</string>
+    <string name="Sign_out">Sign Out</string>
+
+    <string-array name="inspectors">
+        <item>Private Inspector</item>
+        <item>Government Inspector</item>
+    </string-array>
+</resources>
