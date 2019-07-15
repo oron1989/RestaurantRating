@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements
         Intent intent = new Intent(MainActivity.this, UserAccountActivity.class);
         startActivity(intent);
         finish();
-//        ((Activity) getActivity()).overridePendingTransition(0, 0);
+//        ((Activity) getActivity()).overridePendingTransition(0, 0);//
 
     }
 
