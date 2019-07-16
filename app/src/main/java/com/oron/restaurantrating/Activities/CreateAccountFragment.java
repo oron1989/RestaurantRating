@@ -176,6 +176,7 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
                                 DatabaseReference currentUserDB = myDatabaseReference.child(userId);
                                 currentUserDB.child("firstName").setValue(firstName);
                                 currentUserDB.child("lastName").setValue(lastName);
+                                //TODO if image is not file
                                 currentUserDB.child("image").setValue(resultUri.toString());
                                 currentUserDB.child("inspectors").setValue(inspectors);
 
