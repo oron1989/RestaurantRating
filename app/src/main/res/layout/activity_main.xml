@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity"
-    android:id="@+id/box_fragment">
+    android:id="@+id/box_fragment"
+    android:background="@drawable/my_background">
 
 
 </FrameLayout>
