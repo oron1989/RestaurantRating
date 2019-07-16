@@ -47,19 +47,20 @@
 
     <ImageButton
         android:id="@+id/userAccountSearchImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="192dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_search_black_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.917"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/userAccuntSearchtextView"
@@ -80,19 +81,20 @@
 
     <ImageButton
         android:id="@+id/userAccountArchivesImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="192dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/archive1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/userAccountSearchImageButton"
         app:layout_constraintHorizontal_bias="0.359"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/userAccountArchivesTextView"
@@ -113,19 +115,20 @@
 
     <ImageButton
         android:id="@+id/userAccountNewFileImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/new_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.683"
         app:layout_constraintStart_toEndOf="@+id/userAccountUtilitiesImageButton"
         app:layout_constraintTop_toBottomOf="@+id/userAccountSearchImageButton"
-        app:layout_constraintVertical_bias="0.454"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.454" />
 
     <TextView
         android:id="@+id/userAccountNewFileTextView"
@@ -146,19 +149,20 @@
 
     <ImageButton
         android:id="@+id/userAccountUtilitiesImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_assignment_black_48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userAccountArchivesImageButton"
-        app:layout_constraintVertical_bias="0.454"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.454" />
 
     <TextView
         android:id="@+id/userAccountUtilitiesTextView"
