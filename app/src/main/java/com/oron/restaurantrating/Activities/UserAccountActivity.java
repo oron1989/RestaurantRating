@@ -1,9 +1,9 @@
 package com.oron.restaurantrating.Activities;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.oron.restaurantrating.Model.User;
 import com.oron.restaurantrating.R;
 
 public class UserAccountActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,9 +31,10 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
     private ImageButton utilities;
     private ImageButton newForm;
 
-    private FirebaseAuth myAuth;
-    private FirebaseAuth.AuthStateListener myAuthListener;
+    private DatabaseReference myDatabaseReference;
+    private FirebaseDatabase myDatabase;
     private FirebaseUser myUser;
+    private FirebaseAuth myAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,10 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
 
         myAuth = FirebaseAuth.getInstance();
         myUser = myAuth.getCurrentUser();
+
+        myDatabase = FirebaseDatabase.getInstance();
+        myDatabaseReference = myDatabase.getReference().child("MUsers");
+        myDatabaseReference.keepSynced(true);
 
         userName = findViewById(R.id.userAccountNameTextView);
         userPic = findViewById(R.id.userAccountProfilePicImageView);
@@ -83,4 +94,26 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+// Read from the database
+        myDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                User user = dataSnapshot.getValue(User.class);
+
+                Log.d("1", "Value is: " + user.getFirstName());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("2", "Failed to read value.", error.toException());
+            }
+        });
+
+    }
 }

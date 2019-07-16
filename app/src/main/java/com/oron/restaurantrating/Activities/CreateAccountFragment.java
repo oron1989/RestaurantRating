@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,7 +41,7 @@ import static android.app.Activity.RESULT_OK;
  * Use the {@link CreateAccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateAccountFragment extends Fragment {
+public class CreateAccountFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +63,7 @@ public class CreateAccountFragment extends Fragment {
     private Button createAccountLoginButton;
 
     private Context context;
+    private String inspectors;
 
     //Firebase field
     private DatabaseReference myDatabaseReference;
@@ -124,6 +127,12 @@ public class CreateAccountFragment extends Fragment {
         createAccountSpinner = view.findViewById(R.id.createAccountSpinner);
         createAccountLoginButton = view.findViewById(R.id.createAccountButton);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.inspectors, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        createAccountSpinner.setAdapter(adapter);
+        createAccountSpinner.setOnItemSelectedListener(this);
+
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +176,8 @@ public class CreateAccountFragment extends Fragment {
                                 DatabaseReference currentUserDB = myDatabaseReference.child(userId);
                                 currentUserDB.child("firstName").setValue(firstName);
                                 currentUserDB.child("lastName").setValue(lastName);
-                                currentUserDB.child("image").setValue(resultUri.toString()) ;
+                                currentUserDB.child("image").setValue(resultUri.toString());
+                                currentUserDB.child("inspectors").setValue(inspectors);
 
                                 myProgressDialog.dismiss();
 
@@ -227,6 +237,16 @@ public class CreateAccountFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        inspectors = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     /**
