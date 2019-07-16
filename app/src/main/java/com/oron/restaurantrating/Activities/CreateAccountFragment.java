@@ -53,10 +53,10 @@ public class CreateAccountFragment extends Fragment {
 
     //my field
     private ImageButton profilePic;
-    private EditText createAccountFirstName;
-    private EditText createAccountLastName;
-    private EditText createAccountEmail;
-    private EditText createAccountPassword;
+    private EditText firstNameCA;
+    private EditText lastNameCA;
+    private EditText emailCA;
+    private EditText passwordCA;
     private Spinner createAccountSpinner;
     private Button createAccountLoginButton;
 
@@ -108,7 +108,7 @@ public class CreateAccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_account, container, false);
 
         myDatabase = FirebaseDatabase.getInstance();
-        myDatabaseReference = myDatabase.getReference().child("Users");
+        myDatabaseReference = myDatabase.getReference().child("MUsers");
 
         myAuth = FirebaseAuth.getInstance();
 
@@ -117,10 +117,10 @@ public class CreateAccountFragment extends Fragment {
         myProgressDialog = new ProgressDialog(context);
 
         profilePic = view.findViewById(R.id.createAccountprofilePicView);
-        createAccountFirstName = view.findViewById(R.id.createAccountFirstNameEditText);
-        createAccountLastName = view.findViewById(R.id.createAccountLastNameEditText);
-        createAccountEmail = view.findViewById(R.id.createAccountEmailEditText);
-        createAccountPassword = view.findViewById(R.id.createAccountPasswordEditText);
+        firstNameCA = view.findViewById(R.id.createAccountFirstNameEditText);
+        lastNameCA = view.findViewById(R.id.createAccountLastNameEditText);
+        emailCA = view.findViewById(R.id.createAccountEmailEditText);
+        passwordCA = view.findViewById(R.id.createAccountPasswordEditText);
         createAccountSpinner = view.findViewById(R.id.createAccountSpinner);
         createAccountLoginButton = view.findViewById(R.id.createAccountButton);
 
@@ -146,10 +146,10 @@ public class CreateAccountFragment extends Fragment {
     }
 
     private void createNewAccount() {
-        final String firstName = createAccountFirstName.getText().toString().trim();
-        final String lastName = createAccountLastName.getText().toString().trim();
-        String email = createAccountEmail.getText().toString().trim();
-        String password = createAccountPassword.getText().toString().trim();
+        final String firstName = firstNameCA.getText().toString().trim();
+        final String lastName = lastNameCA.getText().toString().trim();
+        String email = emailCA.getText().toString().trim();
+        String password = passwordCA.getText().toString().trim();
 
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             myProgressDialog.setMessage("Creating Account...");

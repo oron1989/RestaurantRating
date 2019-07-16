@@ -46,9 +46,9 @@ public class LoginFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //Statement of variables of Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser mUser;
+    private FirebaseAuth myAuth;
+    private FirebaseAuth.AuthStateListener myAuthListener;
+    private FirebaseUser myUser;
 
     //Statement of variables
     private EditText loginUserEmailEditText;
@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
+        myAuth = FirebaseAuth.getInstance();
 
         loginUserEmailEditText = view.findViewById(R.id.loginEmailEditText);
         loginUserPasswordEditText = view.findViewById(R.id.loginPasswordEditText);
@@ -101,12 +101,12 @@ public class LoginFragment extends Fragment {
         loginCreateAccountButton = view.findViewById(R.id.loginCreateAccountButton);
 
         //When the user is already logged in and reopens the app
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        myAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                mUser = firebaseAuth.getCurrentUser();
+                myUser = firebaseAuth.getCurrentUser();
 
-                if (mUser != null) {
+                if (myUser != null) {
                     MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.getUserAccountActivity();
                 } else {
@@ -123,7 +123,6 @@ public class LoginFragment extends Fragment {
                 if (!TextUtils.isEmpty(loginUserEmailEditText.getText().toString()) && !TextUtils.isEmpty(loginUserPasswordEditText.getText().toString())) {
                     String email = loginUserEmailEditText.getText().toString();
                     String pwd = loginUserPasswordEditText.getText().toString();
-
                     login(email, pwd);
 
                 } else {
@@ -145,10 +144,9 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
-//TODO add auth matode
+
     private void login(String email, String pwd) {
-        //Check that the user exists
-        mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+        myAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -157,9 +155,6 @@ public class LoginFragment extends Fragment {
                     mainActivity.getUserAccountActivity();
                 } else {
                     //Not in!!
-                    //move to create account
-                    MainActivity mainActivity = (MainActivity)getActivity();
-                    mainActivity.getLoginError();
                 }
             }
         });
@@ -207,14 +202,14 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        myAuth.addAuthStateListener(myAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+        if (myAuthListener != null) {
+            myAuth.removeAuthStateListener(myAuthListener);
         }
     }
 }
