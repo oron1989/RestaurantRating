@@ -1,6 +1,8 @@
 package com.oron.restaurantrating.Activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,9 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.oron.restaurantrating.Model.User;
 import com.oron.restaurantrating.R;
 
+import java.util.Collections;
+
 public class UserAccountActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView userName;
+    private TextView userNameTextView;
     private ImageView userPic;
     private ImageButton archives;
     private ImageButton search;
@@ -48,7 +53,7 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         myDatabaseReference = myDatabase.getReference().child("MUsers");
         myDatabaseReference.keepSynced(true);
 
-        userName = findViewById(R.id.userAccountNameTextView);
+        userNameTextView = findViewById(R.id.userAccountNameTextView);
         userPic = findViewById(R.id.userAccountProfilePicImageView);
         archives = findViewById(R.id.userAccountArchivesImageButton);
         search = findViewById(R.id.userAccountSearchImageButton);
@@ -59,6 +64,19 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         search.setOnClickListener(this);
         utilities.setOnClickListener(this);
         newForm.setOnClickListener(this);
+
+//        myDatabaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                User val = dataSnapshot.getValue();
+//                Log.d("val", "" + val.getFirstName());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 
@@ -97,20 +115,39 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onStart() {
         super.onStart();
-// Read from the database
-        myDatabaseReference.addValueEventListener(new ValueEventListener() {
+
+        myDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 User user = dataSnapshot.getValue(User.class);
+
+                userNameTextView.setText(user.getFirstName());
+
+//                blogRecyclerAdapter = new BlogRecyclerAdapter(PostListActivity.this, blogList);
+//                recyclerView.setAdapter(blogRecyclerAdapter);
+//                blogRecyclerAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-
     }
+
 }
