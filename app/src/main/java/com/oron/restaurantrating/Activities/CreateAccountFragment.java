@@ -75,6 +75,7 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
     private DatabaseReference myDatabaseReference;
     private FirebaseDatabase myDatabase;
     private StorageReference myFirebaseStorage;
+    private StorageReference mDefaultUserProfileImageStorage;
     private FirebaseAuth myAuth;
     private ProgressDialog myProgressDialog;
     private Uri resultUri = null;
@@ -122,6 +123,8 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
         myAuth = FirebaseAuth.getInstance();
 
         myFirebaseStorage = FirebaseStorage.getInstance().getReference().child("User_Profile_Pics");
+
+        mDefaultUserProfileImageStorage = FirebaseStorage.getInstance().getReference().child("Default");
 
         myProgressDialog = new ProgressDialog(context);
 
