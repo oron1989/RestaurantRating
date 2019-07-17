@@ -80,19 +80,6 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-//        myDatabaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User val = dataSnapshot.getValue();
-//                Log.d("val", "" + val.getFirstName());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
     }
 
     @Override

@@ -15,6 +15,9 @@
     <string name="new_form">New Form</string>
     <string name="utilities">Utilities</string>
     <string name="Sign_out">Sign Out</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="city">City</string>
+    <string name="create_new_form">Create New Form</string>
 
     <string-array name="inspectors">
         <item>Private Inspector</item>
