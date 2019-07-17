@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +33,8 @@ import com.google.firebase.storage.UploadTask;
 import com.oron.restaurantrating.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -164,10 +170,10 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
             myProgressDialog.setMessage("Creating Account...");
             myProgressDialog.show();
 
-            myAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            myAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onSuccess(AuthResult authResult) {
-                    if (authResult != null) {
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
                         StorageReference imagePath = myFirebaseStorage.child("User_Profile_Pics").child(resultUri.getLastPathSegment());
                         imagePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -187,6 +193,8 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
                                 mainActivity.getUserAccountActivity();
                             }
                         });
+                    } else {
+                        Log.w("tag", "createUserWithEmail:failure", task.getException());
                     }
                 }
             });
@@ -213,6 +221,7 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
                 Exception error = result.getError();
             }
         }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

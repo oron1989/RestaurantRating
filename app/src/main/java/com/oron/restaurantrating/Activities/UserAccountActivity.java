@@ -104,14 +104,11 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 User user = dataSnapshot.getValue(User.class);
-
-                Log.d("1", "Value is: " + user.getFirstName());
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("2", "Failed to read value.", error.toException());
             }
         });
 
