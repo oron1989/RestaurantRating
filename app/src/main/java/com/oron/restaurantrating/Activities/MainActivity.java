@@ -63,4 +63,8 @@ public class MainActivity extends AppCompatActivity implements
         Toast.makeText(MainActivity.this, "One or more fields are incomplete", Toast.LENGTH_LONG).show();
     }
 
+    public void getNotSelectedPhoto() {
+        Toast.makeText(MainActivity.this, "No profile photo selected", Toast.LENGTH_LONG).show();
+    }
+
 }

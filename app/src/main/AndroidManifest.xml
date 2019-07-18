@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.NewFormActivity"></activity>
+        <activity android:name=".Activities.FormActivity"></activity>
+        <activity android:name=".Activities.NewFormActivity" />
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
         <activity android:name=".Activities.UserAccountActivity" />
         <activity android:name=".Activities.MainActivity">

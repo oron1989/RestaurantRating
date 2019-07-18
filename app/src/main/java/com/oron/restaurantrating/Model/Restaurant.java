@@ -6,6 +6,9 @@ public class Restaurant {
     private String city;
     private String inspectionDate;
     private String restaurantId;
+    private String score;
+    private String grade;
+    private String userId;
 
     public Restaurant() {
     }
@@ -15,6 +18,16 @@ public class Restaurant {
         this.city = city;
         this.inspectionDate = timestamp;
         this.restaurantId = restaurantId;
+    }
+
+    public Restaurant(String restaurantName, String city, String inspectionDate, String restaurantId, String score, String grade, String userId) {
+        this.restaurantName = restaurantName;
+        this.city = city;
+        this.inspectionDate = inspectionDate;
+        this.restaurantId = restaurantId;
+        this.score = score;
+        this.grade = grade;
+        this.userId = userId;
     }
 
     public String getRestaurantName() {
@@ -47,5 +60,29 @@ public class Restaurant {
 
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

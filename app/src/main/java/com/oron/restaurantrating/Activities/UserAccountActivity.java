@@ -65,26 +65,44 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
 
 
 
-        myDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                userNameTextView.setText(user.getFirstName());
-                setImage(user.getImage());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        myDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                User user = dataSnapshot.getValue(User.class);
+//                userNameTextView.setText(user.getFirstName());
+//                setImage(user.getImage());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(UserAccountActivity.this, "click", Toast.LENGTH_LONG).show();
+        switch (v.getId()) {
+            case R.id.userAccountArchivesImageButton:
+                Toast.makeText(UserAccountActivity.this, "Archives Button is Clicked",Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.userAccountNewFileImageButton:
+                Toast.makeText(UserAccountActivity.this, "New File Button is Clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(UserAccountActivity.this, NewFormActivity.class));
+                finish();
+                break;
+
+            case R.id.userAccountUtilitiesImageButton:
+                Toast.makeText(UserAccountActivity.this, "Utilities Button is Clicked",Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.userAccountSearchImageButton:
+                Toast.makeText(UserAccountActivity.this, "Search Button is Clicked",Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 
     @Override
@@ -117,13 +135,24 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onStart() {
         super.onStart();
+        myDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                userNameTextView.setText(user.getFirstName());
+                setImage(user.getImage());
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
     private void setImage(String imageUrl){
-
-
         Picasso.get()
                 .load(imageUrl)
                 .resize(200, 200)

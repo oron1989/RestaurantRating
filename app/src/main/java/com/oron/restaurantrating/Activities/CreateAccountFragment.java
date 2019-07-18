@@ -201,9 +201,15 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
                 }
             });
 
+        } else if (resultUri != null){
+            MainActivity mainActivity = (MainActivity)getActivity();
+            mainActivity.getNotSelectedPhoto();
+        } else {
+            MainActivity mainActivity = (MainActivity)getActivity();
+            mainActivity.getNotFull();
         }
 
-
+//to check
 //        if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
 //            myProgressDialog.setMessage("Creating Account...");
 //            myProgressDialog.show();
