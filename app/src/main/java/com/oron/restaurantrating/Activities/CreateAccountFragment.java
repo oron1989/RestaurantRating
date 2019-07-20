@@ -219,41 +219,6 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
             mainActivity.getNotFull();
         }
 
-//to check
-//        if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-//            myProgressDialog.setMessage("Creating Account...");
-//            myProgressDialog.show();
-//
-//            myAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if (task.isSuccessful()) {
-//                        StorageReference imagePath = myFirebaseStorage.child("User_Profile_Pics").child(resultUri.getLastPathSegment());
-//                        imagePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                String userId = myAuth.getCurrentUser().getUid();
-//                                DatabaseReference currentUserDB = myDatabaseReference.child(userId);
-//                                currentUserDB.child("firstName").setValue(firstName);
-//                                currentUserDB.child("lastName").setValue(lastName);
-//                                //TODO if image is not file
-//                                currentUserDB.child("image").setValue(resultUri.toString());
-//                                currentUserDB.child("inspectors").setValue(inspectors);
-//
-//                                myProgressDialog.dismiss();
-//
-//                                //move to user account
-//                                MainActivity mainActivity = (MainActivity)getActivity();
-//                                mainActivity.getUserAccountActivity();
-//                            }
-//                        });
-//                    } else {
-//                        Log.w("tag", "createUserWithEmail:failure", task.getException());
-//                    }
-//                }
-//            });
-//       }
-
     }
 
     @Override

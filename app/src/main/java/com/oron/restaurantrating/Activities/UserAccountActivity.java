@@ -63,23 +63,6 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         utilities.setOnClickListener(this);
         newForm.setOnClickListener(this);
 
-
-
-//        myDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//                userNameTextView.setText(user.getFirstName());
-//                setImage(user.getImage());
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
     }
 
     @Override
