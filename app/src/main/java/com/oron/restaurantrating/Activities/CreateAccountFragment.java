@@ -19,10 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,10 +34,8 @@ import com.oron.restaurantrating.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.File;
-import java.util.concurrent.Executor;
-
 import static android.app.Activity.RESULT_OK;
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -195,9 +193,21 @@ public class CreateAccountFragment extends Fragment implements AdapterView.OnIte
                                 MainActivity mainActivity = (MainActivity)getActivity();
                                 mainActivity.getUserAccountActivity();
                             }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, e.toString());
+                            }
                         });
 
                     }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, e.toString());
                 }
             });
 

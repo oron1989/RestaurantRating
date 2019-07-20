@@ -6,16 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oron.restaurantrating.Model.Question;
+import com.oron.restaurantrating.Model.QuestionView;
 
 import java.util.List;
 
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecyclerAdapter.ViewHolder> {
 
     private Context context;
-    private List<Question> questionList;
+    private List<QuestionView> questionList;
 
-    public QuestionRecyclerAdapter(Context context, List<Question> questionList) {
+    public QuestionRecyclerAdapter(Context context, List<QuestionView> questionList) {
         this.context = context;
         this.questionList = questionList;
     }
