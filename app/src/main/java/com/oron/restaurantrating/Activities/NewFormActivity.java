@@ -94,7 +94,7 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
 
             dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
             dataToSave.put("userId", myUser.getUid());
-            dataToSave.put("Testid", String.valueOf(TestId++));
+            dataToSave.put("Testid", String.valueOf(++TestId));
             dataToSave.put("score", "null");
             dataToSave.put("grade", "null");
 
@@ -140,6 +140,8 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
                     finish();
                 }
                 break;
+
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -153,4 +155,9 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-}
+
+
+
+
+
+    }
