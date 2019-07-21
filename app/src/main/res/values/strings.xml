@@ -28,7 +28,6 @@
     </string-array>
 
     <string-array name="city">
-        <item>Umm al-Fahm</item>
         <item>Ofakim</item>
         <item>Or Yehuda</item>
         <item>Or Akiva</item>
@@ -37,7 +36,6 @@
         <item>Ariel</item>
         <item>Ashdod</item>
         <item>Ashkelon</item>
-        <item>Baka al-Garbiyeh</item>
         <item>Beer Sheva</item>
         <item>Beit Shean</item>
         <item>Beit Shemesh</item>
@@ -56,7 +54,6 @@
         <item>Taybeh</item>
         <item>castle</item>
         <item>Tirat Carmel</item>
-        <item>Tamra</item>
         <item>Yavne</item>
         <item>Yehud-Monosson</item>
         <item>Yokneam Illith</item>
@@ -69,42 +66,42 @@
         <item>Migdal Haemek</item>
         <item>Modi'in Illit</item>
         <item>Modi'in Maccabim-Reut</item>
-        <item>Ma'ale Adumim</item>
-        <item>Tarshiha</item>
-        <item>Nahariya</item>
-        <item>Nof Galilee</item>
-        <item>Ness Ziona</item>
-        <item>Nazareth</item>
-        <item>Nesher</item>
-        <item>Netivot</item>
-        <item>Natnia</item>
-        <item>Sakhnin</item>
-        <item>Acre</item>
-        <item>Afula</item>
-        <item>Araba</item>
-        <item>Arad</item>
-        <item>Petah Tikva</item>
-        <item>Zefat</item>
-        <item>Calensua</item>
-        <item>Kiryat Ono</item>
-        <item>Kiryat Ata</item>
-        <item>Kiryat Bialik</item>
-        <item>Kiryat Gat</item>
-        <item>Kiryat Yam</item>
-        <item>Kiryat Motzkin</item>
-        <item>Kiryat Malachi</item>
-        <item>Kiryat Shmona</item>
-        <item>Rosh HaAyin</item>
-        <item>Rishon Lezion</item>
-        <item>Raht</item>
-        <item>Rehovot</item>
-        <item>Ramla</item>
-        <item>Ramat Gan</item>
-        <item>Ramat Hasharon</item>
-        <item>Raanana</item>
-        <item>Sderot</item>
-        <item>Shfaram</item>
-        <item>Tel Aviv</item>
-        <item>Jaffa</item>
+        <!--<item>Ma'ale Adumim</item>-->
+        <!--<item>Tarshiha</item>-->
+        <!--<item>Nahariya</item>-->
+        <!--<item>Nof Galilee</item>-->
+        <!--<item>Ness Ziona</item>-->
+        <!--<item>Nazareth</item>-->
+        <!--<item>Nesher</item>-->
+        <!--<item>Netivot</item>-->
+        <!--<item>Natnia</item>-->
+        <!--<item>Sakhnin</item>-->
+        <!--<item>Acre</item>-->
+        <!--<item>Afula</item>-->
+        <!--<item>Araba</item>-->
+        <!--<item>Arad</item>-->
+        <!--<item>Petah Tikva</item>-->
+        <!--<item>Zefat</item>-->
+        <!--<item>Calensua</item>-->
+        <!--<item>Kiryat Ono</item>-->
+        <!--<item>Kiryat Ata</item>-->
+        <!--<item>Kiryat Bialik</item>-->
+        <!--<item>Kiryat Gat</item>-->
+        <!--<item>Kiryat Yam</item>-->
+        <!--<item>Kiryat Motzkin</item>-->
+        <!--<item>Kiryat Malachi</item>-->
+        <!--<item>Kiryat Shmona</item>-->
+        <!--<item>Rosh HaAyin</item>-->
+        <!--<item>Rishon Lezion</item>-->
+        <!--<item>Raht</item>-->
+        <!--<item>Rehovot</item>-->
+        <!--<item>Ramla</item>-->
+        <!--<item>Ramat Gan</item>-->
+        <!--<item>Ramat Hasharon</item>-->
+        <!--<item>Raanana</item>-->
+        <!--<item>Sderot</item>-->
+        <!--<item>Shfaram</item>-->
+        <!--<item>Tel Aviv</item>-->
+        <!--<item>Jaffa</item>-->
     </string-array>
 </resources>
