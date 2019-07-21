@@ -19,6 +19,8 @@
     <string name="city">City</string>
     <string name="create_new_form">Create New Form</string>
     <string name="question">Question</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
 
     <string-array name="inspectors">
         <item>Private Inspector</item>

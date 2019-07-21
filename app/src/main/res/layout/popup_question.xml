@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="23dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="23dp"
+                android:paddingTop="5dp"
+                android:text="@string/question"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:padding="10dp"/>
+
+            <RadioGroup
+                android:padding="10dp"
+                android:id="@+id/radioGroup"
+                android:layout_marginTop="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAlert"
+                android:layout_centerVertical="true">
+
+                <RadioButton
+                    android:id="@+id/radioButtonOption1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="option 1" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOption2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/radioGroup"
+                    android:text="option 2" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOption3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="option 3"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonOption4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="option 4"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonOption5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="option 5"/>
+
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/okButton"
+                android:background="@color/colorAccent"
+                android:text="@string/ok"
+                android:layout_marginTop="19dp"
+                android:layout_below="@id/radioGroup"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_alignParentRight="true"
+                android:text="@string/cancel"
+                android:background="@color/colorAccent"
+                android:layout_alignBottom="@id/okButton"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
