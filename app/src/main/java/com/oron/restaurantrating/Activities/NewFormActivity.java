@@ -41,7 +41,7 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
     private Spinner citySpinner;
     private Button createNewFormButton;
     private ProgressDialog myProgress;
-
+    private int TestId = 1000;
     private String city;
 
     private DatabaseReference myInspectorn;
@@ -91,8 +91,11 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
             Map<String , String > dataToSave = new HashMap<>();
             dataToSave.put("name", nameVal);
             dataToSave.put("city", city);
+
             dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
             dataToSave.put("userId", myUser.getUid());
+            dataToSave.put("Testid:", String.valueOf(TestId));
+            TestId++;
             dataToSave.put("score", "null");
             dataToSave.put("grade", "null");
 
