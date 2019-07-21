@@ -19,6 +19,10 @@ import java.util.List;
 
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecyclerAdapter.ViewHolder> {
 
+    private final String answer1 = "Performed as required";
+    private final String answer2 = "improvement required";
+    private final String answer3 = "Not executed as required";
+
     private Context context;
     private List<QuestionView> questionList;
 
@@ -60,7 +64,7 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
             view.setOnClickListener(this);
 
-            question = view.findViewById(R.id.questinTextView);
+            question = view.findViewById(R.id.questionTextView);
 
         }
 
@@ -82,15 +86,16 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
             TextView questionText = view.findViewById(R.id.textAlert);
             RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
-            RadioButton answer1 = view.findViewById(R.id.radioButtonOption1);
-            RadioButton answer2 = view.findViewById(R.id.radioButtonOption2);
-            RadioButton answer3 = view.findViewById(R.id.radioButtonOption3);
-            RadioButton answer4 = view.findViewById(R.id.radioButtonOption4);
-            RadioButton answer5 = view.findViewById(R.id.radioButtonOption5);
+            RadioButton answer1RadioButton = view.findViewById(R.id.radioButtonOption1);
+            RadioButton answer2RadioButton = view.findViewById(R.id.radioButtonOption2);
+            RadioButton answer3RadioButton = view.findViewById(R.id.radioButtonOption3);
             Button okButton = view.findViewById(R.id.okButton);
             Button cancelButton = view.findViewById(R.id.cancelButton);
 
             questionText.setText(question.getQuestion());
+            answer1RadioButton.setText(answer1);
+            answer2RadioButton.setText(answer2);
+            answer3RadioButton.setText(answer3);
 
             alertDialogBuilder.setView(view);
             dialog = alertDialogBuilder.create();

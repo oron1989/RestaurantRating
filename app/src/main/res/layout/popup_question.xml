@@ -39,42 +39,33 @@
                 <RadioButton
                     android:id="@+id/radioButtonOption1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="option 1" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radioButtonOption2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="option 2" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radioButtonOption3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="option 3"/>
-
-                <RadioButton
-                    android:id="@+id/radioButtonOption4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="option 4"/>
-
-                <RadioButton
-                    android:id="@+id/radioButtonOption5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="option 5"/>
-
+                    android:layout_height="wrap_content" />
 
             </RadioGroup>
+
+            <EditText
+                android:id="@+id/remarkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/radioGroup"
+                android:hint="@string/add_a_comment"/>
 
             <Button
                 android:id="@+id/okButton"
                 android:background="@color/colorAccent"
                 android:text="@string/ok"
                 android:layout_marginTop="19dp"
-                android:layout_below="@id/radioGroup"
+                android:layout_below="@id/remarkEditText"
                 android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -82,7 +73,7 @@
 
             <Button
                 android:id="@+id/cancelButton"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:text="@string/cancel"
                 android:background="@color/colorAccent"
                 android:layout_alignBottom="@id/okButton"

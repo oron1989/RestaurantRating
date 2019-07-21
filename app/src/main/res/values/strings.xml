@@ -21,6 +21,9 @@
     <string name="question">Question</string>
     <string name="ok">ok</string>
     <string name="cancel">cancel</string>
+    <string name="selected_answer">Selected Answer</string>
+    <string name="score">score</string>
+    <string name="add_a_comment">Add a comment</string>
 
     <string-array name="inspectors">
         <item>Private Inspector</item>
@@ -64,8 +67,8 @@
         <item>Carmiel</item>
         <item>Lod</item>
         <item>Migdal Haemek</item>
-        <item>Modi'in Illit</item>
-        <item>Modi'in Maccabim-Reut</item>
+        <!--<item>Modi'in Illit</item>-->
+        <!--<item>Modi'in Maccabim-Reut</item>-->
         <!--<item>Ma'ale Adumim</item>-->
         <!--<item>Tarshiha</item>-->
         <!--<item>Nahariya</item>-->
