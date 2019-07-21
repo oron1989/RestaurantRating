@@ -2,7 +2,7 @@ package com.oron.restaurantrating.Model;
 
 public class QuestionView {
 
-    public String question;
+    private String question;
 //    private String answer1;
 //    private String answer2;
 //    private String answer3;

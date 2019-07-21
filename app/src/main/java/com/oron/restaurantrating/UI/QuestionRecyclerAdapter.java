@@ -1,4 +1,4 @@
-package com.oron.restaurantrating.Data;
+package com.oron.restaurantrating.UI;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
@@ -46,22 +45,25 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
         return questionList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView question;
 
         public ViewHolder(@NonNull View view, Context ctx) {
             super(view);
             context = ctx;
 
+            view.setOnClickListener(this);
+
             question = view.findViewById(R.id.questinTextView);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "item click", Toast.LENGTH_SHORT).show();
+        }
 
-                }
-            });
+        @Override
+        public void onClick(View v) {
+            //Get position of the row clicked or tapped
+            int position = getAdapterPosition();
+
+            QuestionView question = questionList.get(position);
         }
     }
 }

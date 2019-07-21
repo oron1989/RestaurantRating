@@ -10,8 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,19 +25,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.oron.restaurantrating.R;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class NewFormActivity extends AppCompatActivity {
+public class NewFormActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText name;
-    private EditText city;
+    private EditText nameET;
+//    private EditText cityET;
+    private Spinner citySpinner;
     private Button createNewFormButton;
     private ProgressDialog myProgress;
 
-    private DatabaseReference myInspction;
+    private String city;
+
+    private DatabaseReference myInspectorn;
     private FirebaseUser myUser;
     private FirebaseAuth myAuth;
 
@@ -45,13 +55,19 @@ public class NewFormActivity extends AppCompatActivity {
 
         myProgress = new ProgressDialog(this);
 
-        myInspction = FirebaseDatabase.getInstance().getReference().child("Restaurants");
+        myInspectorn = FirebaseDatabase.getInstance().getReference().child("Restaurants");
         myAuth = FirebaseAuth.getInstance();
         myUser = myAuth.getCurrentUser();
 
-        name = findViewById(R.id.restaurantNameEditText);
-        city = findViewById(R.id.cityEditText);
+        nameET = findViewById(R.id.restaurantNameEditText);
+//        cityET = findViewById(R.id.cityEditText);
+        citySpinner = findViewById(R.id.CityListNewFormSpinner);
         createNewFormButton = findViewById(R.id.createNewFormButton);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(adapter);
+        citySpinner.setOnItemSelectedListener(this);
 
         createNewFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,21 +82,21 @@ public class NewFormActivity extends AppCompatActivity {
         myProgress.setMessage("Loading the File...");
         myProgress.show();
 
-        String nameVal = name.getText().toString().trim();
-        String cityVal = city.getText().toString().trim();
+        String nameVal = nameET.getText().toString().trim();
+//        String cityVal = cityET.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(nameVal) && !TextUtils.isEmpty(cityVal)) {
-            DatabaseReference newInspctio = myInspction.push();
+        if (!TextUtils.isEmpty(nameVal)) {
+            DatabaseReference newInspector = myInspectorn.push();
 
             Map<String , String > dataToSave = new HashMap<>();
             dataToSave.put("name", nameVal);
-            dataToSave.put("city", cityVal);
+            dataToSave.put("city", city);
             dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
             dataToSave.put("userId", myUser.getUid());
             dataToSave.put("score", "null");
             dataToSave.put("grade", "null");
 
-            newInspctio.setValue(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+            newInspector.setValue(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(NewFormActivity.this, "save", Toast.LENGTH_SHORT).show();
@@ -124,5 +140,15 @@ public class NewFormActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        city = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

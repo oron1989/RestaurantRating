@@ -1,22 +1,18 @@
 package com.oron.restaurantrating.Activities;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.oron.restaurantrating.Data.QuestionRecyclerAdapter;
+import com.oron.restaurantrating.UI.QuestionRecyclerAdapter;
 import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
 
