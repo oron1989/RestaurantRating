@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
     private Context context;
     private List<QuestionView> questionList;
+    private List<QuestionView> questionViewToSave;
+    private Boolean marked;
 
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
@@ -57,6 +60,8 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView question;
+        public TextView scoreText;
+        public TextView selectedAnswer;
 
         public ViewHolder(@NonNull View view, Context ctx) {
             super(view);
@@ -65,6 +70,8 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             view.setOnClickListener(this);
 
             question = view.findViewById(R.id.questionTextView);
+            scoreText = view.findViewById(R.id.scoreTextView);
+            selectedAnswer = view.findViewById(R.id.selectedAnswerTextView);
 
         }
 
@@ -84,11 +91,14 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
             final View view = inflater.inflate(R.layout.popup_question, null);
 
+
+
             TextView questionText = view.findViewById(R.id.textAlert);
-            RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
-            RadioButton answer1RadioButton = view.findViewById(R.id.radioButtonOption1);
-            RadioButton answer2RadioButton = view.findViewById(R.id.radioButtonOption2);
-            RadioButton answer3RadioButton = view.findViewById(R.id.radioButtonOption3);
+
+            final RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
+            final RadioButton answer1RadioButton = view.findViewById(R.id.radioButtonOption1);
+            final RadioButton answer2RadioButton = view.findViewById(R.id.radioButtonOption2);
+            final RadioButton answer3RadioButton = view.findViewById(R.id.radioButtonOption3);
             Button okButton = view.findViewById(R.id.okButton);
             Button cancelButton = view.findViewById(R.id.cancelButton);
 
@@ -104,7 +114,21 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             okButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.dismiss();
+                        if (answer1RadioButton.isChecked()) {
+                            dialog.dismiss();
+                            selectedAnswer.setText(answer1);
+                            scoreText.setText("0");
+                        } else if (answer2RadioButton.isChecked()) {
+                            dialog.dismiss();
+                            selectedAnswer.setText(answer2);
+                            scoreText.setText("3");
+                        } else if (answer3RadioButton.isChecked()) {
+                            dialog.dismiss();
+                            selectedAnswer.setText(answer3);
+                            scoreText.setText("5");
+                    }
+
+
                 }
             });
 
