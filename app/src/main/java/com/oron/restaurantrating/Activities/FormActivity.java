@@ -42,34 +42,8 @@ public class FormActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleViewForm);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.user_account_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.action_add:
-//                if (mAuth != null && mUser != null) {
-//                    startActivity(new Intent(PostListActivity.this, AddPostActivity.class));
-//                    finish();
-//                }
-//               break;
-//            case R.id.action_signout:
-//                if (mAuth != null && mUser != null) {
-//                    mAuth.signOut();
-//                    startActivity(new Intent(PostListActivity.this, MainActivity.class));
-//                    finish();
-//                }
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    }
 
     @Override
     protected void onStart() {
