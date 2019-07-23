@@ -1,4 +1,4 @@
-package com.oron.restaurantrating.Activities;
+package com.oron.restaurantrating.ToDelete;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +12,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.oron.restaurantrating.UI.QuestionRecyclerAdapter;
 import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
 

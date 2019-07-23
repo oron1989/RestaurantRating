@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.oron.restaurantrating.Fragment.CreateAccountFragment;
+import com.oron.restaurantrating.Fragment.LoginFragment;
 import com.oron.restaurantrating.R;
 
 public class MainActivity extends AppCompatActivity implements

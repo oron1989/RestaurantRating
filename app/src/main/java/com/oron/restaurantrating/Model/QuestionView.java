@@ -1,24 +1,34 @@
 package com.oron.restaurantrating.Model;
 
-public class QuestionView {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class QuestionView  implements Parcelable {
 
     private String question;
-    private String answer1;
-    private String answer2;
-    private String answer3;
-    private int score;
-
 
     public QuestionView() {
     }
 
-    public QuestionView(String question, String answer1, String answer2, String answer3, int score) {
+    public QuestionView(String question) {
         this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.score = score;
     }
+
+    protected QuestionView(Parcel in) {
+        question = in.readString();
+    }
+
+    public static final Creator<QuestionView> CREATOR = new Creator<QuestionView>() {
+        @Override
+        public QuestionView createFromParcel(Parcel in) {
+            return new QuestionView(in);
+        }
+
+        @Override
+        public QuestionView[] newArray(int size) {
+            return new QuestionView[size];
+        }
+    };
 
     public String getQuestion() {
         return question;
@@ -28,35 +38,14 @@ public class QuestionView {
         this.question = question;
     }
 
-    public String getAnswer1() {
-        return answer1;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setAnswer1(String answer1) {
-        this.answer1 = answer1;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(question);
     }
 
-    public String getAnswer2() {
-        return answer2;
-    }
-
-    public void setAnswer2(String answer2) {
-        this.answer2 = answer2;
-    }
-
-    public String getAnswer3() {
-        return answer3;
-    }
-
-    public void setAnswer3(String answer3) {
-        this.answer3 = answer3;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
 }

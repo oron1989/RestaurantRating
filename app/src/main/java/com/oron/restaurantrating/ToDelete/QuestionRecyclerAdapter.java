@@ -1,22 +1,33 @@
-package com.oron.restaurantrating.UI;
+package com.oron.restaurantrating.ToDelete;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.oron.restaurantrating.Model.Form;
 import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecyclerAdapter.ViewHolder> {
 
@@ -26,8 +37,11 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
 
     private Context context;
     private List<QuestionView> questionList;
-    private List<QuestionView> questionViewToSave;
-    private Boolean marked;
+    private List<Form> formList = new ArrayList<>();
+
+    private DatabaseReference myForm;
+    private FirebaseUser myUser;
+    private FirebaseAuth myAuth;
 
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
@@ -70,7 +84,7 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             view.setOnClickListener(this);
 
             question = view.findViewById(R.id.questionTextView);
-            scoreText = view.findViewById(R.id.scoreTextView);
+            scoreText = view.findViewById(R.id.totalScoreTextView);
             selectedAnswer = view.findViewById(R.id.selectedAnswerTextView);
 
         }
@@ -81,25 +95,29 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             int position = getAdapterPosition();
             QuestionView question = questionList.get(position);
 
-            editItem(question);
+            FilledAnswer(question);
 
         }
 
-        public void editItem(QuestionView question) {
+        public void FilledAnswer(final QuestionView question) {
             alertDialogBuilder = new AlertDialog.Builder(context);
             inflater = LayoutInflater.from(context);
 
             final View view = inflater.inflate(R.layout.popup_question, null);
 
+            TextView questionText = view.findViewById(R.id.questionFillFormTextView);
 
+            myForm = FirebaseDatabase.getInstance().getReference().child("Form");
+            myAuth = FirebaseAuth.getInstance();
+            myUser = myAuth.getCurrentUser();
+            myForm.keepSynced(true);
+            final DatabaseReference newForm = myForm.push();
 
-            TextView questionText = view.findViewById(R.id.textAlert);
-
-            final RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
-            final RadioButton answer1RadioButton = view.findViewById(R.id.radioButtonOption1);
-            final RadioButton answer2RadioButton = view.findViewById(R.id.radioButtonOption2);
-            final RadioButton answer3RadioButton = view.findViewById(R.id.radioButtonOption3);
-            Button okButton = view.findViewById(R.id.okButton);
+            final RadioGroup radioGroup = view.findViewById(R.id.fillFromradioGroup);
+            final RadioButton answer1RadioButton = view.findViewById(R.id.radioButtonOption1FillForm);
+            final RadioButton answer2RadioButton = view.findViewById(R.id.radioButtonOption2FillForm);
+            final RadioButton answer3RadioButton = view.findViewById(R.id.radioButtonOption3FillForm);
+            Button okButton = view.findViewById(R.id.nextButton);
             Button cancelButton = view.findViewById(R.id.cancelButton);
 
             questionText.setText(question.getQuestion());
@@ -114,21 +132,35 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<QuestionRecycl
             okButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        if (answer1RadioButton.isChecked()) {
-                            dialog.dismiss();
-                            selectedAnswer.setText(answer1);
-                            scoreText.setText("0");
-                        } else if (answer2RadioButton.isChecked()) {
-                            dialog.dismiss();
-                            selectedAnswer.setText(answer2);
-                            scoreText.setText("3");
-                        } else if (answer3RadioButton.isChecked()) {
-                            dialog.dismiss();
-                            selectedAnswer.setText(answer3);
-                            scoreText.setText("5");
+                    Form form;
+                    if (answer1RadioButton.isChecked()) {
+                        dialog.dismiss();
+                        selectedAnswer.setText(answer1);
+                        scoreText.setText("0");
+                    } else if (answer2RadioButton.isChecked()) {
+                        dialog.dismiss();
+                        selectedAnswer.setText(answer2);
+                        scoreText.setText("3");
+                    } else if (answer3RadioButton.isChecked()) {
+                        dialog.dismiss();
+                        selectedAnswer.setText(answer3);
+                        scoreText.setText("5");
                     }
+                    form = new Form(question.getQuestion(), selectedAnswer.getText().toString(),scoreText.getText().toString());
+                    formList.add(form);
 
-
+                    newForm.setValue(formList).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "save", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
                 }
             });
 

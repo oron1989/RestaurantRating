@@ -31,7 +31,7 @@
             android:text="@string/selected_answer"/>
 
         <TextView
-            android:id="@+id/scoreTextView"
+            android:id="@+id/totalScoreTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/score"

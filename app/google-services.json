@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "581833017631-5h53n8it8r39m2tn9g1d4j0vuntb1qm6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oron.restaurantrating",
+            "certificate_hash": "6a3683c0552035577e896c2310c3e7471c8fb057"
+          }
+        },
+        {
           "client_id": "581833017631-8h3e4t1drqm1nhm1pmjkptemd02dls3c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

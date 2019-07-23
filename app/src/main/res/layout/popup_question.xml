@@ -15,7 +15,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textAlert"
+                android:id="@+id/questionFillFormTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -29,43 +29,43 @@
 
             <RadioGroup
                 android:padding="10dp"
-                android:id="@+id/radioGroup"
+                android:id="@+id/fillFromradioGroup"
                 android:layout_marginTop="19dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textAlert"
+                android:layout_below="@+id/questionFillFormTextView"
                 android:layout_centerVertical="true">
 
                 <RadioButton
-                    android:id="@+id/radioButtonOption1"
+                    android:id="@+id/radioButtonOption1FillForm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <RadioButton
-                    android:id="@+id/radioButtonOption2"
+                    android:id="@+id/radioButtonOption2FillForm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <RadioButton
-                    android:id="@+id/radioButtonOption3"
+                    android:id="@+id/radioButtonOption3FillForm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </RadioGroup>
 
             <EditText
-                android:id="@+id/remarkEditText"
+                android:id="@+id/noteEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/radioGroup"
+                android:layout_below="@id/fillFromradioGroup"
                 android:hint="@string/add_a_comment"/>
 
             <Button
-                android:id="@+id/okButton"
+                android:id="@+id/nextButton"
                 android:background="@color/colorAccent"
                 android:text="@string/ok"
                 android:layout_marginTop="19dp"
-                android:layout_below="@id/remarkEditText"
+                android:layout_below="@id/noteEditText"
                 android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -76,7 +76,7 @@
                 android:layout_alignParentEnd="true"
                 android:text="@string/cancel"
                 android:background="@color/colorAccent"
-                android:layout_alignBottom="@id/okButton"
+                android:layout_alignBottom="@id/nextButton"
                 android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

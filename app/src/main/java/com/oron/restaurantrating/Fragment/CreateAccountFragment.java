@@ -1,4 +1,4 @@
-package com.oron.restaurantrating.Activities;
+package com.oron.restaurantrating.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.oron.restaurantrating.Activities.MainActivity;
 import com.oron.restaurantrating.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;

@@ -2,7 +2,9 @@ package com.oron.restaurantrating.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,13 +23,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +48,17 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
     private ProgressDialog myProgress;
 
     private String city;
+    private List<QuestionView> questionViewList;
 
+    //Statement of variables Firebase
     private DatabaseReference myInspectorn;
     private FirebaseUser myUser;
     private FirebaseAuth myAuth;
+
+    private DatabaseReference myDatabaseReference;
+    private FirebaseDatabase myDatabase;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,11 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
         myInspectorn = FirebaseDatabase.getInstance().getReference().child("Restaurants");
         myAuth = FirebaseAuth.getInstance();
         myUser = myAuth.getCurrentUser();
+
+        myDatabase = FirebaseDatabase.getInstance();
+        myDatabaseReference = myDatabase.getReference().child("Question");
+        myDatabaseReference.keepSynced(true);
+        questionViewList = new ArrayList<QuestionView>();
 
         nameET = findViewById(R.id.restaurantNameEditText);
 //        cityET = findViewById(R.id.cityEditText);
@@ -101,7 +118,11 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(NewFormActivity.this, "save", Toast.LENGTH_SHORT).show();
                     myProgress.dismiss();
-                    startActivity(new Intent(NewFormActivity.this, FormActivity.class));
+                    Intent intent = new Intent(NewFormActivity.this, FormFillActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("myList", (ArrayList<? extends Parcelable>) questionViewList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -150,5 +171,38 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        myDatabaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                QuestionView q = dataSnapshot.getValue(QuestionView.class);
+                questionViewList.add(q);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
