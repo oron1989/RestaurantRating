@@ -4,7 +4,7 @@ public class Restaurant {
 
     private String restaurantName;
     private String city;
-    private String inspectionDate;
+    private String timestamp;
     private String restaurantId;
     private String score;
     private String grade;
@@ -16,14 +16,14 @@ public class Restaurant {
     public Restaurant(String restaurantName, String city, String timestamp, String restaurantId) {
         this.restaurantName = restaurantName;
         this.city = city;
-        this.inspectionDate = timestamp;
+        this.timestamp = timestamp;
         this.restaurantId = restaurantId;
     }
 
-    public Restaurant(String restaurantName, String city, String inspectionDate, String restaurantId, String score, String grade, String userId) {
+    public Restaurant(String restaurantName, String city, String timestamp, String restaurantId, String score, String grade, String userId) {
         this.restaurantName = restaurantName;
         this.city = city;
-        this.inspectionDate = inspectionDate;
+        this.timestamp = timestamp;
         this.restaurantId = restaurantId;
         this.score = score;
         this.grade = grade;
@@ -46,12 +46,12 @@ public class Restaurant {
         this.city = city;
     }
 
-    public String getInspectionDate() {
-        return inspectionDate;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setInspectionDate(String inspectionDate) {
-        this.inspectionDate = inspectionDate;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getRestaurantId() {

@@ -132,9 +132,10 @@ public class NewFormActivity extends AppCompatActivity {
 
 //        if (!TextUtils.isEmpty(nameVal)) {
             DatabaseReference newInspector = myInspectorn.push();
+            final String restaurantsUid = newInspector.getKey();
 
             Map<String , String > dataToSave = new HashMap<>();
-            dataToSave.put("name", restaurant);
+            dataToSave.put("restaurantName", restaurant);
             dataToSave.put("city", city);
             dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
             dataToSave.put("userId", myUser.getUid());
@@ -150,6 +151,7 @@ public class NewFormActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("myList", (ArrayList<? extends Parcelable>) questionViewList);
                     intent.putExtras(bundle);
+                    intent.putExtra("restaurantsUid", restaurantsUid);
                     startActivity(intent);
                     finish();
                 }

@@ -1,4 +1,4 @@
-package com.oron.restaurantrating.ToDelete;
+package com.oron.restaurantrating.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,17 +12,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.oron.restaurantrating.Model.QuestionView;
+import com.oron.restaurantrating.Data.ArchivesRecyclerAdapter;
+import com.oron.restaurantrating.Data.SearchRecyclerAdapter;
+import com.oron.restaurantrating.Model.Restaurant;
 import com.oron.restaurantrating.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormActivity extends AppCompatActivity {
+public class ArchivesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private QuestionRecyclerAdapter questionRecyclerAdapter;
-    private List<QuestionView> questionViewList;
+    private ArchivesRecyclerAdapter archivesRecyclerAdapter;
+    private List<Restaurant> restaurantList;
 
     private DatabaseReference myDatabaseReference;
     private FirebaseDatabase myDatabase;
@@ -30,18 +32,17 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        setContentView(R.layout.activity_archives);
 
         myDatabase = FirebaseDatabase.getInstance();
-        myDatabaseReference = myDatabase.getReference().child("Question");
+        myDatabaseReference = myDatabase.getReference().child("Restaurants");
         myDatabaseReference.keepSynced(true);
 
-        questionViewList = new ArrayList<>();
+        restaurantList = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recycleViewForm);
+        recyclerView = findViewById(R.id.recycleViewArchives);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     @Override
@@ -51,13 +52,13 @@ public class FormActivity extends AppCompatActivity {
         myDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                QuestionView questionView = dataSnapshot.getValue(QuestionView.class);
+                Restaurant restaurant = dataSnapshot.getValue(Restaurant.class);
 
-                questionViewList.add(questionView);
+                restaurantList.add(restaurant);
 
-                questionRecyclerAdapter = new QuestionRecyclerAdapter(FormActivity.this, questionViewList);
-                recyclerView.setAdapter(questionRecyclerAdapter);
-                questionRecyclerAdapter.notifyDataSetChanged();
+                archivesRecyclerAdapter = new ArchivesRecyclerAdapter(ArchivesActivity.this, restaurantList);
+                recyclerView.setAdapter(archivesRecyclerAdapter);
+                archivesRecyclerAdapter.notifyDataSetChanged();
 
             }
 

@@ -70,6 +70,8 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.userAccountArchivesImageButton:
                 Toast.makeText(UserAccountActivity.this, "Archives Button is Clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(UserAccountActivity.this, ArchivesActivity.class));
+                finish();
                 break;
 
             case R.id.userAccountNewFileImageButton:
@@ -84,6 +86,8 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.userAccountSearchImageButton:
                 Toast.makeText(UserAccountActivity.this, "Search Button is Clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(UserAccountActivity.this, SearchActivity.class));
+                finish();
                 break;
         }
     }

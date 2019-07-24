@@ -28,6 +28,10 @@
     <string name="add_a_comment">Add a comment</string>
     <string name="question_count">question_1/x</string>
     <string name="total_score">score: 0</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="grade">Grade</string>
+    <string name="inspected_day">Inspected Day</string>
+    <string name="user_name">User Name</string>
 
     <string-array name="inspectors">
         <item>Private Inspector</item>

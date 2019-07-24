@@ -59,7 +59,8 @@ public class FormFillActivity extends AppCompatActivity {
     private List<Form> formList;
 
     //Statement of variables Firebase
-    private DatabaseReference myDatabaseReference;
+    private DatabaseReference myFormReference;
+    private DatabaseReference myRestaurantsReference;
     private FirebaseDatabase myDatabase;
 
     @Override
@@ -70,13 +71,17 @@ public class FormFillActivity extends AppCompatActivity {
         setUI();
 
         myDatabase = FirebaseDatabase.getInstance();
-        myDatabaseReference = myDatabase.getReference().child("Form");
-        myDatabaseReference.keepSynced(true);
+        myFormReference = myDatabase.getReference().child("Form");
+        myFormReference.keepSynced(true);
 
         //get the
         formList = new ArrayList<>();
         Bundle bundle = getIntent().getExtras();
         questionViewList = bundle.getParcelableArrayList("myList");
+        String restaurantsUid = getIntent().getStringExtra("restaurantsUid");
+
+        myRestaurantsReference = myDatabase.getReference().child("Restaurants").child(restaurantsUid);
+        myRestaurantsReference.keepSynced(true);
 
         questionCountTotal = questionViewList.size();
 
@@ -139,7 +144,7 @@ public class FormFillActivity extends AppCompatActivity {
         score += (answerNumber - 1);
         totalScoreTextView.setText("score: " + score);
 
-        Form f = new Form(currentQuestion.getQuestion(), Integer.toString(answerNumber), Integer.toString(answerNumber));
+        Form f = new Form(currentQuestion.getQuestion(), selectedRB.getText().toString(), Integer.toString(answerNumber));
         formList.add(f);
 
         if (questionCounter < questionCountTotal) {
@@ -150,10 +155,20 @@ public class FormFillActivity extends AppCompatActivity {
     }
 
     private void finishFillForm() {
-        DatabaseReference myDatabase = myDatabaseReference.push();
-        myDatabase.setValue(formList).addOnSuccessListener(new OnSuccessListener<Void>() {
+        final DatabaseReference newFormReference = myFormReference.push();
+        newFormReference.setValue(formList).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                myRestaurantsReference.child("score").setValue(String.valueOf(score));
+                if (score >= 0 && score < 10) {
+                    myRestaurantsReference.child("grade").setValue("A");
+                } else if (score >= 10 && score < 20) {
+                    myRestaurantsReference.child("grade").setValue("B");
+                } else if (score >= 20 && score < 30) {
+                    myRestaurantsReference.child("grade").setValue("C");
+                } else {
+                    myRestaurantsReference.child("grade").setValue("D");
+                }
                 Toast.makeText(FormFillActivity.this, "save", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(FormFillActivity.this, UserAccountActivity.class);
                 startActivity(intent);
@@ -166,9 +181,6 @@ public class FormFillActivity extends AppCompatActivity {
             }
         });
 
-//        finish();
-
     }
-
 
 }
