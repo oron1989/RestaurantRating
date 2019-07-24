@@ -39,15 +39,17 @@ import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class NewFormActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewFormActivity extends AppCompatActivity {
 
-    private EditText nameET;
+//    private EditText nameET;
 //    private EditText cityET;
+    private Spinner restaurantSpinner;
     private Spinner citySpinner;
     private Button createNewFormButton;
     private ProgressDialog myProgress;
 
     private String city;
+    private String restaurant;
     private List<QuestionView> questionViewList;
 
     //Statement of variables Firebase
@@ -76,15 +78,41 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
         myDatabaseReference.keepSynced(true);
         questionViewList = new ArrayList<QuestionView>();
 
-        nameET = findViewById(R.id.restaurantNameEditText);
+//        nameET = findViewById(R.id.restaurantNameEditText);
 //        cityET = findViewById(R.id.cityEditText);
+        restaurantSpinner = findViewById(R.id.restaurantListNewFormSpinner);
         citySpinner = findViewById(R.id.CityListNewFormSpinner);
         createNewFormButton = findViewById(R.id.createNewFormButton);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(adapter);
-        citySpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapterR = ArrayAdapter.createFromResource(this, R.array.Restaurnt, android.R.layout.simple_spinner_item);
+        adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        restaurantSpinner.setAdapter(adapterR);
+        restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                restaurant = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapterC = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_item);
+        adapterC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(adapterC);
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                city = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         createNewFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,14 +127,14 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
         myProgress.setMessage("Loading the File...");
         myProgress.show();
 
-        String nameVal = nameET.getText().toString().trim();
+//        String nameVal = nameET.getText().toString().trim();
 //        String cityVal = cityET.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(nameVal)) {
+//        if (!TextUtils.isEmpty(nameVal)) {
             DatabaseReference newInspector = myInspectorn.push();
 
             Map<String , String > dataToSave = new HashMap<>();
-            dataToSave.put("name", nameVal);
+            dataToSave.put("name", restaurant);
             dataToSave.put("city", city);
             dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
             dataToSave.put("userId", myUser.getUid());
@@ -134,7 +162,7 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
                 }
             });
         }
-    }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -161,16 +189,6 @@ public class NewFormActivity extends AppCompatActivity implements AdapterView.On
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        city = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @Override

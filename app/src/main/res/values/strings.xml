@@ -111,4 +111,13 @@
         <!--<item>Tel Aviv</item>-->
         <!--<item>Jaffa</item>-->
     </string-array>
+
+    <string-array name="Restaurnt">
+        <item>Moses</item>
+        <item>BBB</item>
+        <item>Jasmino</item>
+        <item>Agadir</item>
+        <item>Black</item>
+        <item>Burger Saloon</item>
+    </string-array>
 </resources>

@@ -56,19 +56,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/saveFormBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="Save Form"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="670dp" />
-
-
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,13 @@
 package com.oron.restaurantrating.Activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.oron.restaurantrating.Model.Form;
@@ -17,7 +25,9 @@ import com.oron.restaurantrating.Model.QuestionView;
 import com.oron.restaurantrating.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FormFillActivity extends AppCompatActivity {
 
@@ -35,6 +45,7 @@ public class FormFillActivity extends AppCompatActivity {
     private RadioButton answerRB3;
     private EditText noteEditText;
     private Button nextButton;
+    private ProgressDialog myProgress;
     //   private Button backButton;
 
     //Statement of variables
@@ -58,9 +69,9 @@ public class FormFillActivity extends AppCompatActivity {
 
         setUI();
 
-//        myDatabase = FirebaseDatabase.getInstance();
-//        myDatabaseReference = myDatabase.getReference().child("Question");
-//        myDatabaseReference.keepSynced(true);
+        myDatabase = FirebaseDatabase.getInstance();
+        myDatabaseReference = myDatabase.getReference().child("Form");
+        myDatabaseReference.keepSynced(true);
 
         //get the
         formList = new ArrayList<>();
@@ -139,8 +150,25 @@ public class FormFillActivity extends AppCompatActivity {
     }
 
     private void finishFillForm() {
+        DatabaseReference myDatabase = myDatabaseReference.push();
+        myDatabase.setValue(formList).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(FormFillActivity.this, "save", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(FormFillActivity.this, UserAccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(FormFillActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        finish();
+//        finish();
+
     }
+
 
 }
