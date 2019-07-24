@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ArchivesActivity"></activity>
+        <activity android:name=".Activities.UtilitiesActivity"></activity>
+        <activity android:name=".Activities.ArchivesActivity" />
         <activity android:name=".Activities.FormFillActivity" />
         <activity android:name=".Activities.SearchActivity" />
         <activity android:name=".Activities.NewFormActivity" />

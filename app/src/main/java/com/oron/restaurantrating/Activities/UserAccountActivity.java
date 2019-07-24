@@ -69,23 +69,25 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.userAccountArchivesImageButton:
-                Toast.makeText(UserAccountActivity.this, "Archives Button is Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(UserAccountActivity.this, "Archives Button is Clicked",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserAccountActivity.this, ArchivesActivity.class));
                 finish();
                 break;
 
             case R.id.userAccountNewFileImageButton:
-                Toast.makeText(UserAccountActivity.this, "New File Button is Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(UserAccountActivity.this, "New File Button is Clicked",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserAccountActivity.this, NewFormActivity.class));
                 finish();
                 break;
 
             case R.id.userAccountUtilitiesImageButton:
-                Toast.makeText(UserAccountActivity.this, "Utilities Button is Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(UserAccountActivity.this, "Utilities Button is Clicked",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UserAccountActivity.this, UtilitiesActivity.class));
+                finish();
                 break;
 
             case R.id.userAccountSearchImageButton:
-                Toast.makeText(UserAccountActivity.this, "Search Button is Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(UserAccountActivity.this, "Search Button is Clicked",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserAccountActivity.this, SearchActivity.class));
                 finish();
                 break;
