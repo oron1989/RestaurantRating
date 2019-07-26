@@ -54,7 +54,7 @@ public class ArchivesRecyclerAdapter extends RecyclerView.Adapter<ArchivesRecycl
 
         viewHolder.timestamp.setText(formattedDate);
 
-        viewHolder.inspector.setText(restaurant.getUserId());
+//        viewHolder.inspector.setText(restaurant.getUserId());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ArchivesRecyclerAdapter extends RecyclerView.Adapter<ArchivesRecycl
         public TextView grade;
         public TextView score;
         public TextView timestamp;
-        public TextView inspector;
+//        public TextView inspector;
 
         public ViewHolder(@NonNull View view, Context ctx) {
             super(view);
@@ -79,7 +79,7 @@ public class ArchivesRecyclerAdapter extends RecyclerView.Adapter<ArchivesRecycl
             grade = view.findViewById(R.id.gradeArchivesTextView);
             score = view.findViewById(R.id.totalScoreArchivesTextView);
             timestamp = view.findViewById(R.id.inspectionDayArchivesTextView);
-            inspector = view.findViewById(R.id.inspectorNameArchivesTextView);
+//            inspector = view.findViewById(R.id.inspectorNameArchivesTextView);
 
 
             view.setOnClickListener(this);

@@ -2,10 +2,13 @@ package com.oron.restaurantrating.Activities;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -70,5 +73,31 @@ public class UtilitiesActivity extends AppCompatActivity {
         request.setDestinationInExternalFilesDir(context, destinationDirectory, fileName + fileExtension);
 
         downloadManager.enqueue(request);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user_account_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_back_button:
+                startActivity(new Intent(UtilitiesActivity.this, UserAccountActivity.class));
+                finish();
+                break;
+//            case R.id.action_sign_out:
+//                if (myAuth != null && myUser != null) {
+//                    myAuth.signOut();
+//                    startActivity(new Intent(NewFormActivity.this, MainActivity.class));
+//                    finish();
+//                }
+//                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

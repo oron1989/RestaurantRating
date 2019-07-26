@@ -13,6 +13,7 @@
     <string name="search">Search</string>
     <string name="archives">Archives</string>
     <string name="new_form">New Form</string>
+    <string name="form">Form</string>
     <string name="utilities">Utilities</string>
     <string name="Sign_out">Sign Out</string>
     <string name="restaurant_name">Restaurant Name</string>
@@ -32,6 +33,8 @@
     <string name="grade">Grade</string>
     <string name="inspected_day">Inspected Day</string>
     <string name="user_name">User Name</string>
+    <string name="download">Download</string>
+    <string name="self_inspection_pdf">instructions</string>
 
     <string-array name="inspectors">
         <item>Private Inspector</item>

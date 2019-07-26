@@ -176,12 +176,10 @@ public class NewFormActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-//            case R.id.action_add:
-//                if (mAuth != null && mUser != null) {
-//                    startActivity(new Intent(PostListActivity.this, AddPostActivity.class));
-//                    finish();
-//                }
-//                break;
+            case R.id.action_back_button:
+                startActivity(new Intent(NewFormActivity.this, UserAccountActivity.class));
+                finish();
+                break;
             case R.id.action_sign_out:
                 if (myAuth != null && myUser != null) {
                     myAuth.signOut();
@@ -225,4 +223,5 @@ public class NewFormActivity extends AppCompatActivity {
             }
         });
     }
+
 }

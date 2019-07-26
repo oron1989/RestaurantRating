@@ -2,12 +2,9 @@ package com.oron.restaurantrating.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -123,6 +120,7 @@ public class FormFillActivity extends AppCompatActivity {
 
     private void showNextQuestion() {
         radioGroup.clearCheck();
+        noteEditText.getText().clear();
 
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionViewList.get(questionCounter);
@@ -144,7 +142,7 @@ public class FormFillActivity extends AppCompatActivity {
         score += (answerNumber - 1);
         totalScoreTextView.setText("score: " + score);
 
-        Form f = new Form(currentQuestion.getQuestion(), selectedRB.getText().toString(), Integer.toString(answerNumber));
+        Form f = new Form(currentQuestion.getQuestion(), selectedRB.getText().toString(), Integer.toString(answerNumber), noteEditText.getText().toString());
         formList.add(f);
 
         if (questionCounter < questionCountTotal) {

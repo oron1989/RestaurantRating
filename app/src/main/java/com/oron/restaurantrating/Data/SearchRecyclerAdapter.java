@@ -12,6 +12,7 @@ import com.oron.restaurantrating.Model.Restaurant;
 import com.oron.restaurantrating.R;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
         viewHolder.timestamp.setText(formattedDate);
 
-        viewHolder.inspector.setText(restaurant.getUserId());
+//        viewHolder.inspector.setText(restaurant.getUserId());
 
     }
 
@@ -69,7 +70,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         public TextView grade;
         public TextView score;
         public TextView timestamp;
-        public TextView inspector;
+//        public TextView inspector;
 
         public ViewHolder(@NonNull View view, Context ctx) {
             super(view);
@@ -80,7 +81,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             grade = view.findViewById(R.id.gradeSearchTextView);
             score = view.findViewById(R.id.totalScoreSearchTextView);
             timestamp = view.findViewById(R.id.inspectionDaySearchTextView);
-            inspector = view.findViewById(R.id.inspectorNameSearchTextView);
+//            inspector = view.findViewById(R.id.inspectorNameSearchTextView);
 
 
             view.setOnClickListener(this);
@@ -91,5 +92,10 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         public void onClick(View v) {
             //Get position of the row clicked or tapped
         }
+    }
+
+    public void filterList(ArrayList<Restaurant> filteredList) {
+        restaurantList = filteredList;
+        notifyDataSetChanged();
     }
 }
